@@ -9,7 +9,7 @@ var EmitOnOff = module.exports = function(thing){
    * @param  {String}   name name of event
    * @param  {Function} cb   your callback
    */
-  thing.on = function(name, cb){
+  thing.on = function(name, cb, context){
     thing.subs[name] = thing.subs[name] || [];
     thing.subs[name].push({cb:cb});
   };
