@@ -11,7 +11,7 @@ var EmitOnOff = module.exports = function(thing){
    */
   thing.on = function(name, cb){
     thing.subs[name] = thing.subs[name] || [];
-    thing.subs[name].push(cb);
+    thing.subs[name].push({cb:cb});
   };
 
   /**
@@ -22,7 +22,7 @@ var EmitOnOff = module.exports = function(thing){
   thing.off = function(name, cb){
     if (!thing.subs[name]) return;
     for (var i in thing.subs[name]){
-      if (thing.subs[name][i] === cb){
+      if (thing.subs[name][i].cb === cb){
         thing.subs[name].splice(i);
         break;
       }
@@ -38,7 +38,7 @@ var EmitOnOff = module.exports = function(thing){
     if (!thing.subs[name]) return;
     var args = Array.prototype.slice.call(arguments, 1);
     for (var i in thing.subs[name]){
-      thing.subs[name][i].apply(thing, args);
+      thing.subs[name][i].cb.apply(thing, args);
     }
   };
 
