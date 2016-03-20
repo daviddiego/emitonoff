@@ -8,10 +8,14 @@ var EmitOnOff = module.exports = function(thing){
    * Sub of pubsub
    * @param  {String}   name name of event
    * @param  {Function} cb   your callback
+   * @param  {Obect} context   your desired this for your callback (optional)
    */
   thing.on = function(name, cb, context){
     thing.subs[name] = thing.subs[name] || [];
-    thing.subs[name].push({cb:cb});
+    if(context)
+      thing.subs[name].push({cb:cb, cbtbc:cb.bind(context)});
+    else
+      thing.subs[name].push({cb:cb, cbtbc:cb});
   };
 
   /**
