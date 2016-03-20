@@ -42,7 +42,7 @@ var EmitOnOff = module.exports = function(thing){
     if (!thing.subs[name]) return;
     var args = Array.prototype.slice.call(arguments, 1);
     for (var i in thing.subs[name]){
-      thing.subs[name][i].cb.apply(thing, args);
+      thing.subs[name][i].cbtbc.apply(thing, args);
     }
   };
 
